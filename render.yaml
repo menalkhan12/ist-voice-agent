@@ -1,20 +1,14 @@
-# Deploy to Render for one permanent URL (same link for you, friends, any device/WiFi).
-# 1. Push this repo to GitHub.
-# 2. Go to https://dashboard.render.com → New → Web Service → connect repo.
-# 3. Render will use this file. Add env var: GROQ_API_KEY = (your key).
-# 4. After deploy you get: https://<your-service-name>.onrender.com — use that URL everywhere.
-
 services:
   - type: web
     name: ist-voice-agent
     runtime: python
-    buildCommand: "pip install -e ."
+    buildCommand: "pip install -r requirements.txt"
     startCommand: "cd src && gunicorn -w 1 --threads 6 -b 0.0.0.0:$PORT --timeout 120 web_call_app:app"
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
-        value: "3.12.7"
+        value: "3.11.0"
       - key: SKIP_VECTOR_INDEX
         value: "1"
       - key: GROQ_API_KEY
-        sync: false  # set in Render dashboard
+        sync: false
