@@ -1,0 +1,4 @@
+/* Main content margin handled in index.css */
+.main-content {
+  min-height: calc(100vh - var(--navbar-height));
+}

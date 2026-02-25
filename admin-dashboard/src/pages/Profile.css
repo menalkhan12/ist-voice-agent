@@ -1,0 +1,73 @@
+.page-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.profile-card .profile-dl {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 12px 24px;
+  margin-bottom: 24px;
+}
+
+.profile-dl dt {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.profile-dl dd {
+  color: var(--text-primary);
+}
+
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.profile-form label,
+.profile-form input {
+  display: block;
+}
+
+.profile-form label {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.profile-input {
+  width: 100%;
+  max-width: 320px;
+  padding: 10px 12px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+
+.profile-form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.profile-msg.success {
+  color: #059669;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.login-history-list ul {
+  list-style: none;
+}
+
+.login-history-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}

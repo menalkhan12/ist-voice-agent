@@ -1,0 +1,22 @@
+# Web call app only - Python 3.12, no LiveKit agent.
+# Use for Render (Docker) or Railway. Build: docker build -f Dockerfile.web -t ist-voice-agent .
+ARG PYTHON_VERSION=3.12
+FROM python:${PYTHON_VERSION}-slim-bookworm
+
+ENV PYTHONUNBUFFERED=1
+WORKDIR /app
+
+# Install build deps for Python packages
+RUN apt-get update && apt-get install -y --no-install-recommends gcc g++ \
+  && rm -rf /var/lib/apt/lists/*
+
+# Copy app and install dependencies (need full tree for pyproject package)
+COPY . .
+RUN pip install --no-cache-dir . gunicorn
+RUN chown -R nobody:nogroup /app
+USER nobody
+
+EXPOSE 8080
+ENV PORT=8080
+# Render/Railway set PORT; default 8080
+CMD ["sh", "-c", "cd src && gunicorn -w 1 -b 0.0.0.0:${PORT:-8080} --timeout 120 web_call_app:app"]

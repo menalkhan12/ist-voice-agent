@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+__pycache__
+.idea
+KMS
+.venv
+.vscode
+*.egg-info
+.pytest_cache
+.ruff_cache
+data/chroma_db
+logs/
+node_modules/
+admin-dashboard/node_modules/

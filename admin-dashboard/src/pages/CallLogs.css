@@ -1,0 +1,88 @@
+.calllogs-toolbar {
+  margin-bottom: 16px;
+}
+
+.calllogs-search {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px 14px;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.table-wrap {
+  overflow-x: auto;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.calllogs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.calllogs-table th,
+.calllogs-table td {
+  padding: 12px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.calllogs-table th {
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--content-bg);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.calllogs-row {
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.calllogs-row:hover {
+  background: var(--content-bg);
+}
+
+.calllogs-empty {
+  color: var(--text-secondary);
+  padding: 24px;
+  text-align: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+}
+
+.modal {
+  max-width: 560px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal p {
+  margin-bottom: 12px;
+}
+
+.modal-transcript,
+.modal-response {
+  background: var(--content-bg);
+  padding: 12px;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+  font-size: 13px;
+  white-space: pre-wrap;
+}

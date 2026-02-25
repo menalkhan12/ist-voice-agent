@@ -1,0 +1,51 @@
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.reports-card {
+  padding: 20px;
+}
+
+.reports-card.accent .reports-card-value {
+  color: var(--accent-yellow);
+  font-weight: 700;
+}
+
+.reports-card-label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.reports-card-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.reports-chart-card {
+  min-height: 320px;
+}
+
+.reports-chart-desc {
+  color: var(--text-secondary);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.reports-chart-placeholder {
+  height: 280px;
+  background: var(--content-bg);
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 14px;
+}

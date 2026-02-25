@@ -1,0 +1,32 @@
+# Automatic deployment to Render
+# On push to main (or manual run), trigger Render to deploy the IST Voice Agent.
+#
+# One-time setup:
+# 1. In Render: create your Web Service and connect this repo (or use render.yaml).
+# 2. In Render: your service → Settings → Deploy Hook → copy the URL.
+# 3. In GitHub: repo → Settings → Secrets and variables → Actions → New repository secret:
+#    Name: RENDER_DEPLOY_HOOK_URL
+#    Value: (paste the Deploy Hook URL from Render)
+# 4. Push to main (or run this workflow manually) to deploy.
+
+name: Deploy to Render
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:  # allow "Run workflow" from Actions tab
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Render deploy
+        run: |
+          if [ -z "$RENDER_DEPLOY_HOOK_URL" ]; then
+            echo "RENDER_DEPLOY_HOOK_URL secret is not set. Add it in GitHub → Settings → Secrets → Actions."
+            echo "Get the URL from Render → your service → Settings → Deploy Hook."
+            exit 1
+          fi
+          curl -sf -X POST "$RENDER_DEPLOY_HOOK_URL" && echo "Deploy triggered successfully."
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
