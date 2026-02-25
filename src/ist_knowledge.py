@@ -360,3 +360,36 @@ def search(query: str, docs: List[ISTDocument], top_k: int = 5) -> List[ISTDocum
             return hits
     return simple_search(query, docs, top_k=top_k)
 
+
+def build_ist_context(query: str, docs: List[ISTDocument] | None = None, max_chars: int = 3000) -> str:
+    """Build formatted context from relevant IST documents for the LLM.
+    
+    Uses search() to find relevant documents, formats them, and returns as a string.
+    If global IST_DOCS not provided, uses the docs parameter. Returns fallback message if no docs found.
+    """
+    global _docs_list
+    if docs is None:
+        docs = _docs_list
+    if not docs:
+        return "No highly relevant IST website content was found for this question."
+    
+    search_results = search(query, docs, top_k=8)
+    
+    # If main query matched nothing, try a broad fallback so we don't escalate when knowledge base has content
+    if not search_results and docs:
+        search_results = search("IST Institute of Space Technology admission programs fee merit eligibility", docs, top_k=8)
+    
+    if not search_results:
+        return "No highly relevant IST website content was found for this question."
+
+    snippets = []
+    for d in search_results:
+        snippet = d.text[:800]
+        snippets.append(
+            f"TITLE: {d.title or 'N/A'}\nURL: {d.url}\nCONTENT: {snippet}"
+        )
+        joined = "\n\n".join(snippets)
+        if len(joined) >= max_chars:
+            break
+    return "\n\n".join(snippets)
+
