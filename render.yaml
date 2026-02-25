@@ -1,6 +1,16 @@
 services:
   - type: web
     name: ist-voice-agent
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn -k uvicorn.workers.UvicornWorker my-agent.src.gradio_voice_agent:app --workers 4 --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: GROQ_API_KEY
+      - key: OPENAI_API_KEY
+    mounts: []services:
+  - type: web
+    name: ist-voice-agent
     runtime: docker
     dockerfilePath: ./Dockerfile
     healthCheckPath: /health
